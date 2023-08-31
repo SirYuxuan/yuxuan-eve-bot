@@ -1,73 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Maven项目配置文件 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.yuxuan66</groupId>
-    <artifactId>wifePush</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.6</version>
-        <relativePath/>
+    <groupId>com.yuxuan66</groupId> <!-- 项目的组ID -->
+    <artifactId>yuxuan-eve-bot</artifactId> <!-- 项目的唯一标识ID -->
+    <version>1.0-SNAPSHOT</version> <!-- 项目的版本号 -->
+
+    <parent> <!-- 父项目配置 -->
+        <groupId>org.springframework.boot</groupId> <!-- Spring Boot父项目的组ID -->
+        <artifactId>spring-boot-starter-parent</artifactId> <!-- Spring Boot父项目的唯一标识ID -->
+        <version>2.4.6</version> <!-- Spring Boot父项目的版本号 -->
+        <relativePath/> <!-- 父项目的相对路径 -->
     </parent>
-    <properties>
-        <java.version>17</java.version>
-        <project.encoding>UTF-8</project.encoding>
+
+    <properties> <!-- 项目的属性配置 -->
+        <java.version>17</java.version> <!-- Java版本号 -->
+        <project.encoding>UTF-8</project.encoding> <!-- 项目的编码格式 -->
+        <!-- 统一管理版本号 -->
+        <hutool.version>5.8.6</hutool.version>
+        <kotlinx.coroutines.version>1.6.4</kotlinx.coroutines.version>
+        <mirai.version>2.15.0</mirai.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <lombok.version>1.18.20</lombok.version>
+        <mp.version>3.5.2</mp.version>
+        <pinyin4j.version>2.5.0</pinyin4j.version>
+        <honeybadger-java.version>2.1.2</honeybadger-java.version>
     </properties>
-    <dependencies>
-        <!--微信模版消息推送三方sdk-->
+
+    <dependencies> <!-- 项目的依赖配置 -->
+
+        <!-- Lombok -->
         <dependency>
-            <groupId>com.github.binarywang</groupId>
-            <artifactId>weixin-java-mp</artifactId>
-            <version>3.3.0</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
+
+        <!-- Hutool 工具库 -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.8.6</version>
+            <version>${hutool.version}</version>
         </dependency>
+
+        <!-- Kotlin 协程核心库 -->
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-coroutines-core-jvm</artifactId>
-            <version>1.6.4</version>
+            <version>${kotlinx.coroutines.version}</version>
         </dependency>
+
+        <!-- Mirai 聊天机器人核心库 -->
         <dependency>
             <groupId>net.mamoe</groupId>
             <artifactId>mirai-core-jvm</artifactId>
-            <version>2.15.0</version>
+            <version>${mirai.version}</version>
         </dependency>
+
+        <!-- Fastjson JSON处理库 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.83</version>
+            <version>${fastjson.version}</version>
         </dependency>
+
+        <!-- Spring Boot 核心启动器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+
+        <!-- Spring Boot Web 启动器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- SpringBoot Cache -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <!-- SpringBoot Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- MySQL Drive -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- MyBatis Plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mp.version}</version>
+        </dependency>
+
+        <!-- Pinyin -->
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>${pinyin4j.version}</version>
+        </dependency>
+
+        <!-- pool2 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.honeybadger</groupId>
+            <artifactId>honeybadger-java</artifactId>
+            <version>${honeybadger-java.version}</version>
+        </dependency>
+
     </dependencies>
-    <build>
-        <finalName>wifePush</finalName>
-        <plugins>
+
+    <build> <!-- 项目的构建配置 -->
+        <finalName>yuxuanEveBot</finalName> <!-- 构建后的最终名称 -->
+        <plugins> <!-- 插件配置 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <artifactId>maven-compiler-plugin</artifactId> <!-- Maven编译插件 -->
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>${project.encoding}</encoding>
+                    <source>${java.version}</source> <!-- 源代码的Java版本号 -->
+                    <target>${java.version}</target> <!-- 目标字节码的Java版本号 -->
+                    <encoding>${project.encoding}</encoding> <!-- 源代码的编码格式 -->
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <artifactId>spring-boot-maven-plugin</artifactId> <!-- Spring Boot Maven插件 -->
             </plugin>
         </plugins>
     </build>
