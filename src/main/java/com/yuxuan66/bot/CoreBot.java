@@ -9,6 +9,7 @@ import com.yuxuan66.bot.plugin.impl.eve.mapper.TypeAliasMapper;
 import com.yuxuan66.bot.plugin.impl.eve.mapper.TypeMapper;
 import com.yuxuan66.support.cache.key.CacheKey;
 import com.yuxuan66.support.cache.redis.RedisKit;
+import com.yuxuan66.support.config.BotConfig;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.mamoe.mirai.Bot;
@@ -60,6 +61,11 @@ public class CoreBot {
     private final RedisKit redis;
 
     /**
+     * 机器人配置
+     */
+    private final BotConfig botConfig;
+
+    /**
      * 消息插件列表
      */
     public static final List<MessagePlugin> messagePluginList = new ArrayList<>();
@@ -83,7 +89,7 @@ public class CoreBot {
      */
     @PostConstruct
     public void initBot() {
-        bot = BotFactory.INSTANCE.newBot(2438372649L, BotAuthorization.byQRCode(), configuration -> {
+        bot = BotFactory.INSTANCE.newBot(botConfig.getQq(), BotAuthorization.byQRCode(), configuration -> {
             configuration.setProtocol(BotConfiguration.MiraiProtocol.ANDROID_WATCH);
             configuration.fileBasedDeviceInfo();
         });
